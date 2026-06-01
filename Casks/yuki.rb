@@ -14,33 +14,22 @@ cask "yuki" do
 
   caveats <<~EOS
 
-        ⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀
-        ⠀⠀⢀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣶⣤⡀⠀⠀
-        ⠀⢠⣾⣿⣿⡿⠛⠉⠉⠛⢿⣿⣿⣷⡄⠀
-        ⢀⣿⣿⡿⠋⠀⢀⣀⣀⡀⠀⠙⢿⣿⣿⡀
-        ⢸⣿⣿⠁⠀⣰⣿⣿⣿⣿⣆⠀⠈⣿⣿⡇      Y U K I
-        ⢸⣿⣿⠀⠀⣿⣿⣿⣿⣿⣿⠀⠀⣿⣿⡇   your mac, automated
-        ⠘⣿⣿⣆⠀⠘⢿⣿⣿⡿⠃⠀⣰⣿⣿⠃
-        ⠀⠹⣿⣿⣷⣤⣀⣉⣁⣀⣤⣾⣿⣿⠏⠀
-        ⠀⠀⠙⠿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠀⠀
-        ⠀⠀⠀⠀⠀⠉⠛⠛⠉⠀⠀⠀⠀⠀⠀
+        ╭──────────────────────────────╮
+        │   Y U K I                    │
+        │   your mac, automated        │
+        ╰──────────────────────────────╯
 
-    Yuki installed successfully! 🎐
+    Yuki installed! 🎐
 
-    ⚠  First launch (Yuki isn't notarized yet, so Gatekeeper blocks it once):
+    ⚠  First launch (not notarized yet — Gatekeeper blocks it once):
          → Right-click Yuki.app in /Applications → "Open" → confirm.
          (Or run: xattr -dr com.apple.quarantine /Applications/Yuki.app)
 
-    Then Yuki guides you through:
-      1. Accessibility permission (so it can drive your apps)
-      2. Picking an AI provider (Google Gemini free tier / Anthropic / Ollama)
+    Then Yuki guides you through Accessibility permission + picking an AI
+    provider (Google Gemini free tier / Anthropic / Ollama).
 
-    Yuki lives in your menu bar (look for "Y", no Dock icon).
-    Press  ⌘⇧A  from anywhere to open the command bar.
-
-    Ask it anything, or tell it to do things:
-      "what's on my calendar today"
-      "open whatsapp and message mom I'll be late"
+    Yuki lives in your menu bar ("Y", no Dock icon).
+    Press  Cmd+Shift+A  from anywhere to open the command bar.
   EOS
 
   uninstall quit: "com.yuki.app"
