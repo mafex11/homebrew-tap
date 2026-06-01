@@ -13,14 +13,34 @@ cask "yuki" do
   app "Yuki.app"
 
   caveats <<~EOS
-    Yuki is not yet notarized. On first launch macOS Gatekeeper will block it:
-      → Right-click Yuki.app in /Applications and choose "Open", then confirm.
-      (Or: System Settings → Privacy & Security → "Open Anyway".)
 
-    Yuki needs Accessibility permission to drive your apps. On first launch it
-    will guide you to System Settings → Privacy & Security → Accessibility.
+        ⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀
+        ⠀⠀⢀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣶⣤⡀⠀⠀
+        ⠀⢠⣾⣿⣿⡿⠛⠉⠉⠛⢿⣿⣿⣷⡄⠀
+        ⢀⣿⣿⡿⠋⠀⢀⣀⣀⡀⠀⠙⢿⣿⣿⡀
+        ⢸⣿⣿⠁⠀⣰⣿⣿⣿⣿⣆⠀⠈⣿⣿⡇      Y U K I
+        ⢸⣿⣿⠀⠀⣿⣿⣿⣿⣿⣿⠀⠀⣿⣿⡇   your mac, automated
+        ⠘⣿⣿⣆⠀⠘⢿⣿⣿⡿⠃⠀⣰⣿⣿⠃
+        ⠀⠹⣿⣿⣷⣤⣀⣉⣁⣀⣤⣾⣿⣿⠏⠀
+        ⠀⠀⠙⠿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠀⠀
+        ⠀⠀⠀⠀⠀⠉⠛⠛⠉⠀⠀⠀⠀⠀⠀
 
-    Press Cmd+Shift+A from anywhere to open the command bar.
+    Yuki installed successfully! 🎐
+
+    ⚠  First launch (Yuki isn't notarized yet, so Gatekeeper blocks it once):
+         → Right-click Yuki.app in /Applications → "Open" → confirm.
+         (Or run: xattr -dr com.apple.quarantine /Applications/Yuki.app)
+
+    Then Yuki guides you through:
+      1. Accessibility permission (so it can drive your apps)
+      2. Picking an AI provider (Google Gemini free tier / Anthropic / Ollama)
+
+    Yuki lives in your menu bar (look for "Y", no Dock icon).
+    Press  ⌘⇧A  from anywhere to open the command bar.
+
+    Ask it anything, or tell it to do things:
+      "what's on my calendar today"
+      "open whatsapp and message mom I'll be late"
   EOS
 
   uninstall quit: "com.yuki.app"
