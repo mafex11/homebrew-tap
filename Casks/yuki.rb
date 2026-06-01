@@ -1,6 +1,6 @@
 cask "yuki" do
   version "0.1.0"
-  sha256 "eb3d9e3fbf0a2ff265a255e8429ff0b096f76bd524ff8901d19f795f6359966c"
+  sha256 "f503671d151ea72cf8b85fa1e23c30adb37d4e54b026d97708360787bce99df3"
 
   url "https://github.com/mafex11/yuki-mac-use/releases/download/v#{version}/Yuki-#{version}.zip"
   name "Yuki"
