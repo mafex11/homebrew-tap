@@ -64,16 +64,21 @@ cask "yuki" do
 
     Yuki installed! 🎐
 
-    ⚠  First launch (not notarized yet — Gatekeeper blocks it once):
-         → Right-click Yuki.app in /Applications → "Open" → confirm.
-         (Or run: xattr -dr com.apple.quarantine /Applications/Yuki.app)
-
-    Then Yuki guides you through Accessibility permission + picking an AI
-    provider (Google Gemini free tier / Anthropic / Ollama).
+    On first launch Yuki guides you through Accessibility permission + picking
+    an AI provider (Google Gemini free tier / Anthropic / Ollama).
 
     Yuki lives in your menu bar ("Y", no Dock icon).
     Press  Cmd+Shift+A  from anywhere to open the command bar.
   EOS
+
+  # Yuki isn't notarized yet, so Homebrew's quarantine flag would make
+  # Gatekeeper block the first launch. Strip it on install so the app opens
+  # directly. (Remove this once the app is signed + notarized.)
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args: ["-dr", "com.apple.quarantine", "#{appdir}/Yuki.app"],
+                   sudo: false
+  end
 
   uninstall quit: "com.yuki.app"
 
