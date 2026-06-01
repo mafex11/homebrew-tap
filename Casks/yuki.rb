@@ -1,6 +1,6 @@
 cask "yuki" do
   version "0.1.0"
-  sha256 "f503671d151ea72cf8b85fa1e23c30adb37d4e54b026d97708360787bce99df3"
+  sha256 "dbdd6961bf37027fc687ae93f78d79518936659c7d50ace9a3184af6755b32b1"
 
   url "https://github.com/mafex11/yuki-mac-use/releases/download/v#{version}/Yuki-#{version}.zip"
   name "Yuki"
@@ -77,6 +77,15 @@ cask "yuki" do
   postflight do
     system_command "/usr/bin/xattr",
                    args: ["-dr", "com.apple.quarantine", "#{appdir}/Yuki.app"],
+                   sudo: false
+
+    # The app is ad-hoc signed (unnotarized), so each new build has a different
+    # cdhash. macOS TCC tracks the Accessibility grant by cdhash, so an upgrade
+    # leaves the OLD grant orphaned: System Settings still shows "Yuki ✓" but
+    # AXIsProcessTrusted() returns false. Reset it on install so first-launch
+    # onboarding prompts cleanly against the new build's identity.
+    system_command "/usr/bin/tccutil",
+                   args: ["reset", "Accessibility", "com.yuki.app"],
                    sudo: false
   end
 
