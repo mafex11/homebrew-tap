@@ -7,7 +7,7 @@ cask "floatx" do
   desc "Ambient floating shower of your X timeline, one post at a time"
   homepage "https://github.com/mafex11/FloatX"
 
-  depends_on macos: ">= :tahoe"
+  depends_on macos: :tahoe
 
   app "FloatX.app"
 
