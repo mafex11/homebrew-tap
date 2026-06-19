@@ -1,6 +1,6 @@
 cask "floatx" do
-  version "0.1.0"
-  sha256 "0d231ca2b0efd9b6be162a999c88ebc1240fa592fd243e98d37175e1526d1aa1"
+  version "0.1.1"
+  sha256 "f823b52672b2200993ac8b999dd6c03cdf6b49d2260c6a6cf6ba4a84c15e5af3"
 
   url "https://github.com/mafex11/FloatX/releases/download/v#{version}/FloatX.zip"
   name "FloatX"
