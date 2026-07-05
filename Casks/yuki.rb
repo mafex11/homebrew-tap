@@ -1,6 +1,6 @@
 cask "yuki" do
-  version "0.4.0"
-  sha256 "6c30ce65f96173b4ffadcd1a294901fa6a7a556010ec89a057fcba8bc04c0314"
+  version "0.4.1"
+  sha256 "45f54d77a9213e5aa3743d37372f3772298a313adcac6cf0a53afa1d3148c256"
 
   url "https://github.com/mafex11/yuki-mac-use/releases/download/v#{version}/Yuki-#{version}.zip"
   name "Yuki"
@@ -73,19 +73,14 @@ cask "yuki" do
 
   # Yuki isn't notarized yet, so Homebrew's quarantine flag would make
   # Gatekeeper block the first launch. Strip it on install so the app opens
-  # directly. (Remove this once the app is signed + notarized.)
+  # directly. (Remove this once the app is notarized.)
+  #
+  # Since 0.4.1 the app is signed with a real (stable) certificate identity,
+  # so the TCC Accessibility grant and Keychain ACL survive upgrades — no
+  # tccutil reset needed anymore.
   postflight do
     system_command "/usr/bin/xattr",
                    args: ["-dr", "com.apple.quarantine", "#{appdir}/Yuki.app"],
-                   sudo: false
-
-    # The app is ad-hoc signed (unnotarized), so each new build has a different
-    # cdhash. macOS TCC tracks the Accessibility grant by cdhash, so an upgrade
-    # leaves the OLD grant orphaned: System Settings still shows "Yuki ✓" but
-    # AXIsProcessTrusted() returns false. Reset it on install so first-launch
-    # onboarding prompts cleanly against the new build's identity.
-    system_command "/usr/bin/tccutil",
-                   args: ["reset", "Accessibility", "com.yuki.app"],
                    sudo: false
   end
 
