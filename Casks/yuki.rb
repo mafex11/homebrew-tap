@@ -7,7 +7,7 @@ cask "yuki" do
   desc "Jarvis-style macOS assistant — Raycast-style command bar with a local agent"
   homepage "https://github.com/mafex11/yuki-mac-use"
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
   depends_on arch: :arm64
 
   app "Yuki.app"
