@@ -13,10 +13,10 @@ cask "lid-awake" do
   binary "#{appdir}/Lid Awake.app/Contents/MacOS/LidAwake", target: "lid-awake"
 
   # Lid Awake is ad-hoc signed (not notarized). Strip the quarantine flag so it
-  # opens without the Gatekeeper prompt, then start it in the menu bar.
+  # opens without the Gatekeeper prompt. Homebrew runs these steps in a sandbox
+  # that cannot launch apps, so starting it is left to the user (see caveats).
   postflight_steps do
     run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{appdir}}/Lid Awake.app"]
-    run "/usr/bin/open", args: ["{{appdir}}/Lid Awake.app"]
   end
 
   # Quitting (on uninstall and on upgrade) puts sleep back to normal. The script
@@ -35,7 +35,11 @@ cask "lid-awake" do
       delete: "/etc/sudoers.d/lid-awake"
 
   caveats <<~EOS
-    Lid Awake is in your menu bar (a moon).
+    Start Lid Awake once (after that it opens at login):
+
+      open -a "Lid Awake"
+
+    It lives in the menu bar as a moon.
 
       Click it        keep the Mac running when the lid closes (a cup)
       Click again     back to normal sleep
