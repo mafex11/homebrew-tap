@@ -7,27 +7,21 @@ cask "lid-awake" do
   desc "Menu bar switch that keeps a MacBook running with the lid closed"
   homepage "https://github.com/mafex11/lid-awake"
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   app "Lid Awake.app"
   binary "#{appdir}/Lid Awake.app/Contents/MacOS/LidAwake", target: "lid-awake"
 
   # Lid Awake is ad-hoc signed (not notarized). Strip the quarantine flag so it
-  # opens without the Gatekeeper prompt. On an upgrade the old copy is still
-  # running, so stop it first (it puts sleep back to normal as it exits), then
-  # start the new one in the menu bar.
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/Lid Awake.app"],
-                   sudo: false
-    system_command "/usr/bin/pkill", args: ["-x", "LidAwake"], must_succeed: false, sudo: false
-    system_command "/bin/sleep", args: ["1"], sudo: false
-    system_command "/usr/bin/open", args: ["#{appdir}/Lid Awake.app"], sudo: false
+  # opens without the Gatekeeper prompt, then start it in the menu bar.
+  postflight_steps do
+    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{appdir}}/Lid Awake.app"]
+    run "/usr/bin/open", args: ["{{appdir}}/Lid Awake.app"]
   end
 
-  # Quitting puts sleep back to normal. The script is a second line of defence
-  # for the case where the app was not running: never leave sleep disabled
-  # behind an uninstall.
+  # Quitting (on uninstall and on upgrade) puts sleep back to normal. The script
+  # is a second line of defence for the case where the app was not running:
+  # never leave sleep disabled behind an uninstall.
   uninstall quit:   "dev.mafex.lidawake",
             script: {
               executable:   "#{appdir}/Lid Awake.app/Contents/MacOS/LidAwake",
